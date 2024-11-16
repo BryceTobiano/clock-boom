@@ -2,5 +2,80 @@ frontend/node_modules/
 frontend/.next
 frontend/.swc/
 frontend/.*.env
-
 backend/env
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Dependencies
+frontend/node_modules
+frontend/.pnp
+frontend/.pnp.js
+frontend/.yarn/install-state.gz
+
+# Testing
+frontend/coverage
+
+# Next.js
+frontend/.next/*
+frontend/out/
+
+# Production
+frontend/build
+
+# Misc
+frontend/.DS_Store
+frontend/*.pem
+
+# Debug
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# Local env files
+frontend/.env*.local
+frontend/.env
+
+# Vercel
+frontend/.vercel
+
+# TypeScript
+frontend/*.tsbuildinfo
+frontend/next-env.d.ts
+
+# IDEs and editors
+frontend/.idea
+frontend/.project
+frontend/.classpath
+frontend/.c9/
+frontend/*.launch
+frontend/.settings/
+frontend/*.sublime-workspace
+frontend/.vscode/
+
+# OS generated files
+frontend/.DS_Store
+frontend/.DS_Store?
+frontend/._*
+frontend/.Spotlight-V100
+frontend/.Trashes
+frontend/ehthumbs.db
+frontend/Thumbs.db
+
+# Logs
+frontend/logs
+frontend/*.log
+
+# Optional npm cache directory
+frontend/.npm
+
+# Optional eslint cache
+frontend/.eslintcache
+
+# Optional stylelint cache
+frontend/.stylelintcache
+
+# Microbundle cache
+frontend/.rpt2_cache/
+frontend/.rts2_cache_cjs/
+frontend/.rts2_cache_es/
+frontend/.rts2_cache_umd/
