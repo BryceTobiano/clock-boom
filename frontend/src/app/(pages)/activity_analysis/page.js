@@ -30,24 +30,7 @@ export default function ActivityAnalysis() {
       <h1>ACTIVITY ANALYSIS</h1>
       
       <div className={styles.grid}>
-        {/* Efficiency Score */}
         <div className={styles.row}>
-          <div className={styles.card}>
-            <h2 className={styles.cardTitle}>EFFICIENCY SCORE</h2>
-            <Image src="/img/efficiency-score.png" width={200} height={200}></Image>
-            {/* <ActivityAnalysisCharts 
-              efficiencyData={efficiencyData}
-              colors={colors}
-              workLogData={workLogData}
-              timeSheetData={timeSheetData}
-            /> */}
-            <p className={styles.efficiencyScore}>
-              <span className={styles.scoreValue}>87%</span><br />
-              Daily Tasks Completed<br />
-              October 7, 2024
-            </p>
-          </div>
-
           {/* Today's Tasks */}
           <div className={styles.card}>
             <h2 className={styles.cardTitle}>TODAY</h2>
@@ -63,6 +46,22 @@ export default function ActivityAnalysis() {
                 <span>Not Started: 2</span>
               </div>
             </div>
+          </div>
+          {/* Efficiency Score */}
+          <div className={styles.card}>
+            <h2 className={styles.cardTitle}>EFFICIENCY SCORE</h2>
+            <Image src="/img/efficiency-score.png" width={200} height={200}></Image>
+            {/* <ActivityAnalysisCharts 
+              efficiencyData={efficiencyData}
+              colors={colors}
+              workLogData={workLogData}
+              timeSheetData={timeSheetData}
+            /> */}
+            <p className={styles.efficiencyScore}>
+              <span className={styles.scoreValue}>87%</span><br />
+              Daily Tasks Completed<br />
+              October 7, 2024
+            </p>
           </div>
         </div>
       

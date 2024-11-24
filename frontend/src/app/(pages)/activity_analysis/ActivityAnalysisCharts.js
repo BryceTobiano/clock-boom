@@ -8,16 +8,23 @@ const ActivityAnalysisCharts = ({ efficiencyData, colors, workLogData, timeSheet
   return (
     <>
       <div className={styles.chartContainer}>
-        <PieChart width={200} height={200}>
+         <PieChart>
           <Pie
-            data={efficiencyData}
-            innerRadius={60}
-            outerRadius={80}
-            paddingAngle={5}
+            data={data}
+            cx="50%"
+            cy="50%"
+            innerRadius="70%"
+            outerRadius="100%"
+            startAngle={90}
+            endAngle={-270}
             dataKey="value"
           >
-            {efficiencyData.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+            {data.map((entry, index) => (
+              <Cell 
+                key={`cell-${index}`} 
+                fill={COLORS[index]} 
+                strokeWidth={0}
+              />
             ))}
           </Pie>
         </PieChart>

@@ -7,70 +7,69 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../globals.css';
 import global from '../../global.module.css';
 import Navbar from '../../components/nav/nav';
+import TimeFinder1 from '../../time_finder/component/timefinder1';
+import TimeFinder2 from '../../time_finder/component/timefinder2';
+import TimeFinder3 from '../../time_finder/component/timefinder3';
+import TimeFinder4 from '../../time_finder/component/timefinder4';
+// import TimeMatcher5 from '../../time_matcher/component/timematcher5';
 
+const TimeFinderPage = () => {
+  const [step, setStep] = useState(1);
+  const [selectedUser, setSelectedUser] = useState('');
+  const [selectedDate, setSelectedDate] = useState({});
+  const [selectedTime, setSelectedTime] = useState(null);
 
-export default function TimeFinder() {
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [duration, setDuration] = useState('');
+  const handleNext = (data) => {
+    if (step === 1) {
+      setSelectedUser(data);
+      setStep(2);
+    } else if (step === 2) {
+      setSelectedDate(data);
+      setStep(3);
+    } else if (step === 3) {
+      setSelectedTime(data);
+      setStep(4);
+    } else if (step === 4) {
+      console.log('Meeting request sent:', { selectedUser, selectedDate, selectedTime, ...data });
+      setStep(5);
+    }
+  };
+
+  const handleBack = () => {
+    setStep(step - 1);
+  };
+
+  const handleDashboard = () => {
+    // Implement navigation to dashboard
+    console.log('Navigating to dashboard');
+  };
+
+  const handleScheduleAnother = () => {
+    setStep(1);
+  };
 
   return (
     <div>
-      <div className={global.page}>
-      
-        <Navbar/>
-        <div className={global.content}>
-        <main className={styles.mainContent}>
-          <h1 className={styles.title}>TIME FINDER</h1>
-          <div className={styles.card}>
-            <div className={styles.questionRow}>
-              <span className={styles.calendarIcon}>
-                <Image src="/icons/calendar.png" width={75} height={75} />
-              </span>
-              <p className={styles.question}>What dates do you want to schedule?</p>
-            </div>
-            <div className={styles.inputRow}>
-              <div className={styles.inputGroup}>
-                <label htmlFor="startDate">START DATE</label>
-                <input
-                  type="date"
-                  id="startDate"
-                  value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
-                  placeholder="mm/dd/yyyy"
-                />
-              </div>
-              <div className={styles.inputGroup}>
-                <label htmlFor="endDate">END DATE</label>
-                <input
-                  type="date"
-                  id="endDate"
-                  value={endDate}
-                  onChange={(e) => setEndDate(e.target.value)}
-                  placeholder="mm/dd/yyyy"
-                />
-              </div>
-              <div className={styles.inputGroup}>
-                <label htmlFor="duration">DURATION</label>
-                <select
-                  id="duration"
-                  value={duration}
-                  onChange={(e) => setDuration(e.target.value)}
-                >
-                  <option value="">Select</option>
-                  <option value="30">30 minutes</option>
-                  <option value="60">1 hour</option>
-                  <option value="90">1.5 hours</option>
-                  <option value="120">2 hours</option>
-                </select>
-              </div>
-            </div>
-            <button className={styles.nextButton}>NEXT →</button>
-          </div>
-        </main>
-      
-      </div>
-    </div>
+      <Navbar />
+      {step === 1 && <TimeFinder1 onNext={handleNext} />}
+      {step === 2 && <TimeFinder2 onNext={handleNext} onBack={handleBack} />}
+      {step === 3 && (
+        <TimeFinder3
+          onNext={handleNext}
+          onBack={handleBack}
+          selectedCategory={selectedUser}
+          selectedDate={selectedDate}
+          selectedTime={selectedTime}
+        />
+      )}
+      {step === 4 && (
+        <TimeFinder4
+          onDashboard={handleDashboard}
+          onScheduleAnother={handleScheduleAnother}
+        />
+      )}
     </div>
   );
 };
+
+export default TimeFinderPage;

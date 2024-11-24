@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira:wght@300;400;500;600;700&display=swap');
+
+.logo {
+  margin-top: auto;
+}
+
+.logoPlaceholder {
+  width: 30px;
+  height: 30px;
+  background-color: #4CAF50;
+  transform: rotate(45deg);
+}
+
+.mainContent {
+  flex-grow: 1;
+  padding: 40px 60px;
+}
+
+.title {
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 30px 30px 80px 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  font-family: 'Saira', sans-serif;
+  font-weight: 200px;
+}
+
+.questionRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.calendarIcon {
+  color: #ff6b6b;
+  padding: 12px;
+  border-radius: 50%;
+  margin-right: 20px;
+  font-size: 24px;
+}
+
+.question {
+  color: #4CAF50;
+  font-size: 22px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.inputRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  border: 1px solid blue;
+}
+
+.inputGroup {
+  width: 30%;
+}
+
+.inputGroup label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+}
+
+.inputGroup input,
+.inputGroup select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 16px;
+  font-family: 'Saira', sans-serif;
+  color: #333;
+}
+
+.inputGroup select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23888' d='M10.59 0.59L6 5.17L1.41 0.59L0 2L6 8L12 2L10.59 0.59Z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 30px;
+}
+
+.nextButton {
+  background-color: #e0e0e0;
+  color: #888;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  cursor: pointer;
+  float: right;
+  transition: background-color 0.3s, color 0.3s;
+  font-family: 'Saira', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.nextButton:hover {
+  background-color: #4CAF50;
+  color: #ffffff;
+}
+
+.backButton {
+  background-color: #e0e0e0;
+  color: #888;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  cursor: pointer;
+  float: left;
+  transition: background-color 0.3s, color 0.3s;
+  font-family: 'Saira', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.backButton:hover {
+  background-color: #4CAF50;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .inputRow {
+    flex-direction: column;
+  }
+
+  .inputGroup {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .mainContent {
+    padding: 20px;
+  }
+
+  .question {
+    font-size: 18px;
+  }
+}
+
+.timeSlots {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.timeSlot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  min-width: 120px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+  background-color: #f9f9f9;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.timeSlot:last-child {
+  margin-right: 0;
+}
+
+.timeSlot.selected {
+  background-color: #e6f7ff;
+  border-color: #1890ff;
+}
+
+.slotDetails {
+  text-align: center;
+}
+
+.day {
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.date {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.time {
+  font-size: 14px;
+  color: #666;
+}
+
+.timeSlot:before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+  .timeSlot {
+    min-width: 100px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+.timeSlot.selected:before {
+  background-color: #45B681;
+  border-color: #45B681;
+}

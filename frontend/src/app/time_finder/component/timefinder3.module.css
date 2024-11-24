@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira:wght@300;400;500;600;700&display=swap');
+
+.logo {
+  margin-top: auto;
+}
+
+.logoPlaceholder {
+  width: 30px;
+  height: 30px;
+  background-color: #4CAF50;
+  transform: rotate(45deg);
+}
+
+.mainContent {
+  flex-grow: 1;
+  padding: 40px 60px;
+}
+
+.title {
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 30px 30px 80px 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  font-family: 'Saira', sans-serif;
+  font-weight: 200px;
+}
+
+.questionRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.emailIcon {
+  margin-right: 16px;
+}
+
+.question {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+}
+
+.formRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.formLabel {
+  width: 150px;
+  font-size: 14px;
+  color: #666;
+}
+
+.formInput,
+.formTextarea {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.formInput {
+  height: 40px;
+}
+
+.formTextarea {
+  height: 100px;
+}
+
+.formInput:focus,
+.formTextarea:focus {
+  outline: none;
+  border-color: #4CAF50;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: space-between;
+}
+
+.backButton,
+.nextButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.backButton {
+  background-color: #f2f2f2;
+  color: #333;
+  border-radius: 25px;
+}
+
+.backButton:hover {
+  background-color: #e6e6e6;
+}
+
+.nextButton {
+  background-color: #4CAF50;
+  color: #fff;
+  border-radius: 25px;
+}
+
+.nextButton:hover {
+  background-color: #45a049;
+}
