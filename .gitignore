@@ -1,82 +1,75 @@
-frontend/node_modules/
-frontend/.next
-frontend/.swc/
-frontend/.*.env
-backend/env
-backend/timesparkBackend/.env
-
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # Dependencies
-frontend/node_modules
-frontend/.pnp
-frontend/.pnp.js
-frontend/.yarn/install-state.gz
+/node_modules
+/.pnp
+/.pnp.js
+.yarn/install-state.gz
 
 # Testing
-frontend/coverage
+/coverage
 
 # Next.js
-frontend/.next/*
-frontend/out/
+/.next/*
+/out/
 
 # Production
-frontend/build
+/build
 
 # Misc
-frontend/.DS_Store
-frontend/*.pem
+.DS_Store
+*.pem
 
 # Debug
-frontend/npm-debug.log*
-frontend/yarn-debug.log*
-frontend/yarn-error.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Local env files
-frontend/.env*.local
-frontend/.env
+.env*.local
+.env
 
 # Vercel
-frontend/.vercel
+.vercel
 
 # TypeScript
-frontend/*.tsbuildinfo
-frontend/next-env.d.ts
+*.tsbuildinfo
+next-env.d.ts
 
 # IDEs and editors
-frontend/.idea
-frontend/.project
-frontend/.classpath
-frontend/.c9/
-frontend/*.launch
-frontend/.settings/
-frontend/*.sublime-workspace
-frontend/.vscode/
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+.vscode/
 
 # OS generated files
-frontend/.DS_Store
-frontend/.DS_Store?
-frontend/._*
-frontend/.Spotlight-V100
-frontend/.Trashes
-frontend/ehthumbs.db
-frontend/Thumbs.db
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
 # Logs
-frontend/logs
-frontend/*.log
+logs
+*.log
 
 # Optional npm cache directory
-frontend/.npm
+.npm
 
 # Optional eslint cache
-frontend/.eslintcache
+.eslintcache
 
 # Optional stylelint cache
-frontend/.stylelintcache
+.stylelintcache
 
 # Microbundle cache
-frontend/.rpt2_cache/
-frontend/.rts2_cache_cjs/
-frontend/.rts2_cache_es/
-frontend/.rts2_cache_umd/
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
