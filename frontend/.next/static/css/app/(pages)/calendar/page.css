@@ -1,0 +1,180 @@
+/*!*******************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ../node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[12].use[2]!../node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[12].use[3]!./src/app/globals.css ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************/
+
+/*======= Color Variables =======*/
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --gray: #F4F4F4;
+  --yellow: #FDC613;
+  --red: #ED6033;
+  --green: #45B681;
+  --blue: #5396E4;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Saira, Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+
+
+/* ======= START - STYLING DEFAULT COMPONENTS ======= */
+h1 {
+  font-weight: 500;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+/* ======= END - STYLING DEFAULT COMPONENTS ======= */
+
+/* TODO: Implement Dark Theme */
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+} */
+
+/* @media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+} */
+
+/* START - Full-Calendar Styling Classes */
+
+.fc .fc-button {
+  color: black;
+  background-color: white;
+  text-transform: capitalize;
+  font-weight: 600;
+  box-shadow: 0px 4px 20px -5px rgba(0,0,0,0.2);
+
+}
+
+.fc .fc-button-active {
+  color: white;
+  background-color: black;
+}
+
+.fc .fc-dayGridDay-button {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+.fc .fc-dayGridMonth-button {
+  border-radius: 0px;
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+.fc .fc-timeGridWeek-button {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  padding-right: 1em;
+  padding-left: 1em;
+  margin-right: 1em;
+}
+
+.fc .fc-toolbar-title {
+  display: inline;
+  padding: 0.3em 1em;
+  padding-bottom: 0.45em ;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+
+  font-size: 1em;
+  font-weight: 600;
+  box-shadow: 0px 4px 20px -5px rgba(0,0,0,0.2);
+}
+
+.fc .fc-next-button {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.fc .fc-prev-button {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+/* END - Full-Calendar Styling Classes */
+/*!***********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ../node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[2]!../node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[3]!./src/app/global.module.css ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************/
+/* ======= Main wrap for page ======= */
+.global_page__q720x {
+    display: flex;
+    height: 100%;
+
+    /* Spacing from Navbar*/
+    position: relative;
+    margin-left: 40px;
+}
+
+/* ======= Content Wrapper ======= */
+.global_content__68SBT {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1;
+    padding: 80px;
+    gap: 64px;
+}
+
+/*!***********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ../node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[2]!../node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[3]!./src/app/components/nav/nav.module.css ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************/
+
+.nav_navbar__FjzPZ {
+    /* width: 80px; */
+    height: 100%;
+    
+    background-color: #F6F6F6;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav_navbar_section__saq35 {
+    display:flex;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .nav_navbar_item__zcEP8 {
+    cursor: pointer;
+    margin-bottom: 30px;
+  }
+  
+

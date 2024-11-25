@@ -1,8 +1,28 @@
-import { LoginSchema, SignupFormSchema } from '@/app/lib/definitions'
-import bcrypt from 'bcryptjs';
-import { redirect } from 'next/navigation'
+import { LoginSchema, SignupFormSchema } from '@/app/lib/definitions' 
 
- 
+function setCookie(cname, cvalue) {
+    const d = new Date();
+    d.setTime(d.getTime() + (30*24*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+export function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
 export async function signup(state, formData ) {
 // 1. Validate form fields
     const validatedFields = SignupFormSchema.safeParse({
@@ -52,7 +72,6 @@ export async function signup(state, formData ) {
         }
     }
 
-
     // 4. Create user session
     // 5. Redirect user
     let validUser = 1;
@@ -71,6 +90,11 @@ export async function signup(state, formData ) {
             if(res.status >= 400) {
                 validUser = 0;
             }
+            return res.json()
+        })
+        .then((json) => {
+            setCookie("timesparkRefreshToken", json.refresh)
+            setCookie("timesparkAccessToken", json.access)
         })
     } catch (e) {
         console.log("Register error: " + e);
@@ -80,7 +104,8 @@ export async function signup(state, formData ) {
                 password: ['Invalid Username or Password'],
             }}
         }  else {
-            redirect("/dashboard");
+            window.history.pushState(null, '/login')
+            window.location.replace("/dashboard");
         }
     }
   }
@@ -108,7 +133,12 @@ export async function signup(state, formData ) {
         .then((res) => {
             if(res.status >= 400) {
                 validUser = 0;
-            }
+            } 
+            return res.json()
+        })
+        .then((json) => {
+            setCookie("timesparkRefreshToken", json.refresh)
+            setCookie("timesparkAccessToken", json.access)
         })
     } catch (e) {
         console.log("Register error: " + e);
@@ -118,7 +148,8 @@ export async function signup(state, formData ) {
                 password: ['Invalid Username or Password'],
             }}
         }  else {
-            redirect("/dashboard");
+            window.history.pushState(null, '/login')
+            window.location.replace("/dashboard");
         }
     }
   }
