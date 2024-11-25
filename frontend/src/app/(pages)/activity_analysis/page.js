@@ -6,6 +6,11 @@ import '../../globals.css';
 import global from '../../global.module.css';
 import Navbar from '../../components/nav/nav';
 import Image from 'next/image';
+import Chart from 'chart.js/auto';
+import BarChart from './components/BarChart';
+import PieChart from './components/PieChart';
+import DonutChart from './components/DonutChart';
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"></script>
 
 export default function ActivityAnalysis() {
   const efficiencyData = [{ value: 87 }, { value: 13 }];
@@ -24,6 +29,7 @@ export default function ActivityAnalysis() {
     { name: 'Self Development', value: 60, color: '#FF5722' },
   ];
 
+
   return (
     <div className={clsx(styles.container, global.page)}>
       <div><Navbar /></div>
@@ -34,13 +40,8 @@ export default function ActivityAnalysis() {
         <div className={styles.row}>
           <div className={styles.card}>
             <h2 className={styles.cardTitle}>EFFICIENCY SCORE</h2>
-            <Image src="/img/efficiency-score.png" width={200} height={200}></Image>
-            {/* <ActivityAnalysisCharts 
-              efficiencyData={efficiencyData}
-              colors={colors}
-              workLogData={workLogData}
-              timeSheetData={timeSheetData}
-            /> */}
+            {/* <div><canvas id="efficiency_chart" width="200px" height="300px"></canvas></div> */}
+            <div><DonutChart/></div>
             <p className={styles.efficiencyScore}>
               <span className={styles.scoreValue}>87%</span><br />
               Daily Tasks Completed<br />
@@ -70,8 +71,8 @@ export default function ActivityAnalysis() {
         <div className={styles.row}>
           {/* Work Logs */}
         <div className={styles.card}>
-          <h2 className={styles.cardTitle}>WORK LOGS</h2>
-          <Image src="/img/work-log.png" width={200} height={200} alt="chart"></Image>
+          <h2 className={styles.cardTitle}>WORK LOG</h2>
+          <div><BarChart/></div>
           <p className={styles.workLogLabel}>Work Logged in Last 4 Days</p>
         </div>
 
@@ -80,7 +81,7 @@ export default function ActivityAnalysis() {
           <h2 className={styles.cardTitle}>TIME SHEET</h2>
           <div className={styles.timeSheetContent}>
             {/* <h3 className={styles.totalHours}>3.6H</h3> */}
-            <Image src="/img/time-sheet.png" width={150} height={150}></Image>
+            <div><PieChart/></div>
             <ul className={styles.timeSheetList}>
               {timeSheetData.map((item, index) => (
                 <li key={index} className={styles.timeSheetItem}>
@@ -96,4 +97,29 @@ export default function ActivityAnalysis() {
       </div>
     </div>
   );
+
+  
+  // const efficiency_chart = new Chart("efficiency_chart", {
+  //   type: "doughnut",
+  //   data: data,
+  // });
+
+  // const data = {
+  //   labels: [
+  //     'Red',
+  //     'Blue',
+  //     'Yellow'
+  //   ],
+  //   datasets: [{
+  //     label: 'Effiency of Work',
+  //     data: [300, 50, 100],
+  //     backgroundColor: [
+  //       'rgb(255, 99, 132)',
+  //       'rgb(54, 162, 235)',
+  //       'rgb(255, 205, 86)'
+  //     ],
+  //     hoverOffset: 4
+  //   }]
+  // };
+
 }
