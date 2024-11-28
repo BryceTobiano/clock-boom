@@ -53,6 +53,21 @@
     border-radius: 10px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   }
+
+  .cardLeft {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center; 
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    width:50%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  }
   
   .cardTitle {
     align-self: flex-start; /* Align the title to the left */
@@ -61,6 +76,13 @@
     font-size: 1.125rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
+  }
+
+  .inline {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
   }
   
   .efficiencyScore {
@@ -74,41 +96,66 @@
   }
   
   .date {
-    font-size: 0.875rem;
     color: #6b7280;
-    align-self: flex-start; /* Align the title to the left */
-    text-align: left; /* Ensure text inside the title stays left-aligned */
-    width: 100%; /* Make sure the title spans the full width */
+    text-align: right;
+    font-size: 1.125rem;
+    font-weight: 600;
     margin-bottom: 0.5rem;
+    width:100%;
   }
   
+  .taskListHeader {
+    background-color: white;
+    display: block;
+    justify-content: center;
+    align-items:baseline;
+    text-align: left;
+    padding: 2% 4% 1% 4%;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  }
+
   .taskList {
-    margin-top: 1rem;
+    margin-top: 1%;
     display: flex;
     flex-direction: row;
-    gap: 0.5rem;
-    width: 40;
+    justify-content: space-between;
+    width: 100%;
   }
   
   .task {
     padding: 0.5rem;
     border-radius: 0.25rem;
-    margin-right:10px;
+    width:100%;
+    margin: 10px 10px 10px 0px;
   }
   
   .completed {
     background-color: #d1fae5;
     color: #065f46;
+    text-align: left;
+    padding-left:3%;
+    border: 1px solid #065f46;
   }
   
   .inProgress {
     background-color: #fef3c7;
     color: #92400e;
+    text-align: left;
+    padding-left:3%;
+    border: 1px solid #92400e;
   }
   
   .notStarted {
     background-color: #fee2e2;
     color: #991b1b;
+    text-align: left;
+    padding-left:3%;
+    border: 1px solid #991b1b;
+  }
+
+  .todaysTasks {
+    width:60vw;
   }
   
   .workLogLabel {
@@ -117,7 +164,7 @@
   }
   
   .timeSheet {
-    grid-column: span 3 / span 3;
+    width: 50%;
   }
   
   .timeSheetContent {

@@ -52,7 +52,7 @@ export default function PieChart(){
             chartRef.current.chart = newChart
         }
     }, [])
-    return<div style={{ position:"relative", width:"400px", height:"100%"}}>
+    return<div style={{width:"100%", height:"100%"}}>
         <canvas ref={chartRef}/>
     </div>
 
