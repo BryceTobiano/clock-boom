@@ -9,7 +9,7 @@ export default function Page() {
 
   async function fetchProtectedData() {
     let token = getCookie("timesparkAccessToken");
-    await fetch('http://localhost:8000/api/events', {
+    await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + '/api/events', {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`, // Add the JWT token here

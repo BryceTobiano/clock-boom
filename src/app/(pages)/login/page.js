@@ -18,7 +18,7 @@ export default function LoginPage() {
           <Image src="/logo.png" alt="Time Spark Logo" width={74} height={82} />
           <h1 className="h4 mt-2">TIME SPARK</h1>
           <h2 className="h4 mt-2">Login</h2>
-          </div>
+        </div>
         <form action={action}>
           <div className="mb-3">
             <input type="email" name="email" className="form-control" placeholder="Email" />
@@ -56,7 +56,7 @@ function SubmitButton() {
  
   return (
     <button disabled={pending} type="submit" value="Submit" className="btn btn-primary border-1 border-black border-solid w-100 mb-3">
-      Sign Up
+      Login
     </button>
   )
 }

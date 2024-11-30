@@ -19,6 +19,5 @@ export const SignupFormSchema = z.object({
 
   export const LoginSchema = z.object({
     email: z.string().email({ message: 'Please enter a valid email.' }).trim(),
-    password: z.string().trim(),
-
+    password: z.string().trim()
   })

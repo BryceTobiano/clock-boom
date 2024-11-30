@@ -1,4 +1,5 @@
 import { LoginSchema, SignupFormSchema } from '@/app/lib/definitions' 
+import { redirect } from 'next/dist/server/api-utils';
 
 function setCookie(cname, cvalue) {
     const d = new Date();
@@ -46,7 +47,7 @@ export async function signup(state, formData ) {
 // 3. Insert the user into the database
     let validEmail = 1;
     try {
-        await fetch("http://127.0.0.1:8000/api/register/", {
+        await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + "/api/register/", {
             method: "POST",
             body: JSON.stringify({
                 name: name,
@@ -76,7 +77,7 @@ export async function signup(state, formData ) {
     // 5. Redirect user
     let validUser = 1;
     try {
-        await fetch("http://127.0.0.1:8000/api/token/", {
+        await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + "/api/token/", {
             method: "POST",
             body: JSON.stringify({
                 email: email,
@@ -114,13 +115,20 @@ export async function signup(state, formData ) {
     const validatedFields = LoginSchema.safeParse({
         email: formData.get('email'),
         password: formData.get('password'),
-      })
-  
+    })
+
+    // If any form fields are invalid, return early
+    if (!validatedFields.success) {
+        return {
+            errors: validatedFields.error.flatten().fieldErrors,
+        }
+    }
+
     const { email, password } = validatedFields.data
 
     let validUser = 1;
     try {
-        await fetch("http://127.0.0.1:8000/api/token/", {
+        await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + "/api/token/", {
             method: "POST",
             body: JSON.stringify({
                 email: email,
@@ -141,7 +149,7 @@ export async function signup(state, formData ) {
             setCookie("timesparkAccessToken", json.access)
         })
     } catch (e) {
-        console.log("Register error: " + e);
+        console.log("Login error: " + e);
     } finally {
         if(!validUser) {
             return { errors: {
@@ -153,3 +161,34 @@ export async function signup(state, formData ) {
         }
     }
   }
+
+export async function refresh(response) {
+    console.log(response)
+    let refreshToken = getCookie("timesparkRefreshToken");
+    if (!response.ok) {
+        if(response.status == 401) {
+            await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + '/api/token/refresh/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ refresh: refreshToken }),
+            })
+            .then(res => {
+                if (!res.ok) {
+                    setCookie("timesparkRefreshToken", "");
+                    setCookie("timesparkAccessToken", "");
+                    window.history.pushState(null, '/login')
+                    window.location.replace("/login");
+                } else {
+                    return res.json();
+                }
+            })
+            .then(json => {
+                setCookie("timesparkAccessToken", json.access)
+            })
+        } else {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+    }
+}
