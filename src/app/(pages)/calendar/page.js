@@ -23,6 +23,33 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 let token = getCookie("timesparkAccessToken");
 
+export async function getServerSideProps() {
+
+  // Fetch data from external API
+  await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + '/api/calendar/?user=' + userId, {
+    method: 'GET',
+    headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        'Authorization': `Bearer ${token}`, // Add the JWT token here
+    }
+  })
+  .then(res => {
+    if (!res.ok) {
+      if(res.status == 401) {
+        refresh(res);
+      } else {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+    }
+      return res.json()
+  })
+  .then(json => {
+    setUserCalendars(json);
+  })
+  // Pass data to the page via props
+  return { props: { repo } }
+}
+
 export default function Page() {
   const [userCalendars, setUserCalendars] = useState([]);
   const [userCategories, setUserCategories] = useState([]);
@@ -94,6 +121,7 @@ export default function Page() {
     const formData = new FormData(e.target);
     const name = formData.get('name');
     const description = formData.get('description');
+    const category = formData.get('category');
       
     let userId = getUserIdFromToken(token);
     await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + '/api/calendar/', {
@@ -101,7 +129,8 @@ export default function Page() {
         body: JSON.stringify({
             name: name,
             description: description,
-            user: userId
+            default_category: category,
+            user: userId,
         }),
         headers: {
             "Content-type": "application/json; charset=UTF-8",
@@ -110,6 +139,8 @@ export default function Page() {
     })
     .then(res => {
         if (!res.ok) {
+            console.log(res.json());
+            console.log(res.body);
             throw new Error(`HTTP error! status: ${res.status}`);
         }
         return res.json()
@@ -121,6 +152,16 @@ export default function Page() {
       setSnackbarMsg(name + "Calendar has successfully created");
       openSnackbar();
     })
+  }
+
+  const createEvent = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const name = formData.get('name');
+    const description = formData.get('description');
+    const category = formData.get('category');
+    const calendar = formData.get('calendar');
+    console.log(calendar);
   }
 
   let events =   [
@@ -169,7 +210,7 @@ export default function Page() {
                   </AccordionSummary>
                   <AccordionDetails className={styles.accordionDetails}>
                     <Button onClick={createCalendarOpen} className={styles.accordionButton}>Create Calendar</Button>
-                    <Button onClick={getUserCalendars} className={styles.accordionButton}>Create Event</Button>
+                    <Button onClick={createEventOpen} className={styles.accordionButton}>Create Event</Button>
 
                   </AccordionDetails>
                 </Accordion>
@@ -210,7 +251,7 @@ export default function Page() {
                 <h3 style={{textAlign: "center", marginBottom: "1em"}}>Create Calendar</h3>
                 <div style={{ marginBottom: '1rem' }}>
                   <label>
-                    Name: *
+                    Calendar Name: *
                     <input
                       type="text"
                       name="name"
@@ -232,11 +273,13 @@ export default function Page() {
 
                 <div style={{marginBottom: "1em"}}>
                   <label>
-                    Category: (Optional)
-                    <select className={styles.categorySelect}>
-                      <option disabled selected value> -- select an option -- </option>
+                    Default Category:
+                    <p style={{fontSize:"0.5em"}}>(OPTIONAL)</p>
+                    <p style={{fontSize:"0.5em", fontStyle:"italic"}}>Events in this calendar will be automatically assign to this category</p>
+                    <select name="category" className={styles.categorySelect}>
+                      <option disabled selected value=""> -- Select an option -- </option>
                       {userCategories.map((category, index) => (
-                        <option key={index} value={category.name}>
+                        <option key={index} value={category.id}>
                           {category.name}
                         </option>
                       ))}
@@ -247,19 +290,19 @@ export default function Page() {
             </form>
           </Box>
         </Modal>
-        
+
         <Modal
-          open={createCalendarModalOpen}
-          onClose={createCalendarClose}
+          open={createEventModalOpen}
+          onClose={createEventClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
             <Box className={styles.modal}>    
-              <form onSubmit={createCalendar} className={styles.modalForm}>
+              <form onSubmit={createEvent} className={styles.modalForm}>
                 <h3 style={{textAlign: "center", marginBottom: "1em"}}>Create Event</h3>
                 <div style={{ marginBottom: '1rem' }}>
                   <label>
-                    Name: *
+                    Event Name: *
                     <input
                       type="text"
                       name="name"
@@ -281,21 +324,39 @@ export default function Page() {
 
                 <div style={{marginBottom: "1em"}}>
                   <label>
+                    Calendars: *
+                    <select name="calendar" className={styles.categorySelect} required>
+                      <option disabled selected value=""> -- Select an option -- </option>
+                      {userCalendars.map((calendar, index) => (
+                        <option key={index} value={calendar.id}>
+                          {calendar.name}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                </div>
+
+                <div style={{marginBottom: "1em"}}>
+                  <label>
                     Category: (Optional)
-                    <select className={styles.categorySelect}>
-                      <option disabled selected value> -- select an option -- </option>
+                    <select name="category" className={styles.categorySelect}>
+                      <option disabled selected value=""> None </option>
                       {userCategories.map((category, index) => (
-                        <option key={index} value={category.name}>
+                        <option key={index} value={category.id}>
                           {category.name}
                         </option>
                       ))}
                     </select>
                   </label>
                 </div>
-                <Button type="submit" className="primary-button">Create Calendar</Button>
+
+                
+                <Button type="submit" className="primary-button">Create Event</Button>
             </form>
           </Box>
         </Modal>
+        
+
 
         <Snackbar
           anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
