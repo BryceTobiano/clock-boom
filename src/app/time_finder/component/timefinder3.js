@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from 'react';
 import styles from './timefinder3.module.css';
 import Image from 'next/image';
@@ -53,7 +54,7 @@ const TimeFinder3 = ({ onBack, onNext, selectedTimeSlot }) => {
       <Navbar />
       <div className={global.content}>
         <main className={styles.mainContent}>
-          <h1 className={styles.title}>TIME FINDER 3</h1>
+          <h1 className={styles.title}>TIME FINDER</h1>
           <div className={styles.card}>
             <div className={styles.questionRow}>
               <span className={styles.emailIcon}>
@@ -81,7 +82,8 @@ const TimeFinder3 = ({ onBack, onNext, selectedTimeSlot }) => {
                 <input
                   type="text"
                   value={selectedDate}
-                  readOnly
+                  onChange={(e) => setSelectedDate(e.target.value)}
+                  placeholder="Enter date (MM/DD)"
                   className={styles.formInput}
                 />
               </div>
@@ -90,7 +92,8 @@ const TimeFinder3 = ({ onBack, onNext, selectedTimeSlot }) => {
                 <input
                   type="text"
                   value={selectedTime}
-                  readOnly
+                  onChange={(e) => setSelectedTime(e.target.value)}
+                  placeholder="Enter time (HH:MM AM/PM)"
                   className={styles.formInput}
                 />
               </div>

@@ -131,3 +131,12 @@
         font-size: 18px;
     }
 }
+.errorMessage {
+    color: red;
+    background-color: #ffeeee;
+    padding: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    border: 1px solid red;
+    border-radius: 5px;
+  }

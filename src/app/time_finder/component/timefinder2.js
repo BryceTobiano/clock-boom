@@ -28,7 +28,7 @@ const TimeFinder2 = ({ onBack, onNext }) => {
         <Navbar />
         <div className={global.content}>
           <main className={styles.mainContent}>
-            <h1 className={styles.title}>TIME FINDER 2</h1>
+            <h1 className={styles.title}>TIME FINDER</h1>
             <div className={styles.card}>
               <div className={styles.questionRow}>
                 <p className={styles.question}>⭐ Matches found! You're available at these times:</p>
