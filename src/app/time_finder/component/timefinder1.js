@@ -23,7 +23,7 @@ const TimeFinder1 = ({ onNext }) => {
                 <Navbar />
                 <div className={global.content}>
                     <main className={styles.mainContent}>
-                        <h1 className={styles.title}>TIME FINDER 1</h1>
+                        <h1 className={styles.title}>TIME FINDER</h1>
                         <div className={styles.card}>
                             <div className={styles.questionRow}>
                                 <span className={styles.calendarIcon}>

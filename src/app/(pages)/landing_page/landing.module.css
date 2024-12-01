@@ -1,0 +1,128 @@
+.page {
+  position: relative; /* Necessary for absolute positioning within */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #ffffff;
+}
+  
+  .content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  .startButton {
+    position: absolute; /* Make the button's position relative to the viewport */
+    top: 10px; /* Distance from the top of the viewport */
+    right: 10px; /* Distance from the right of the viewport */
+    background-color: #f6f6f6;
+    color: #676767;
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 8.5px;
+    cursor: pointer;
+    margin: 85px;
+  }
+
+  .startButtonHover:hover {
+    background-color:  #45B681;
+  }
+  
+  .logoContainer {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+  }
+  
+  .title {
+    font-size: 32px;
+    margin: 0;
+  }
+  
+  .mainContent {
+    padding-left: 80px;
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+  }
+  
+  .imageContainer {
+    width: 350px;
+    height: 233px;
+    flex-shrink: 0;
+    margin-right: 2rem;
+    padding-right: 50px;
+  }
+  
+  .workerImage {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .textContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .mainTitle {
+    font-size: 40px;
+    margin: 0 0 0.5rem 0;
+  }
+  
+  .mainDescription {
+    font-family: 'Proxima Nova', sans-serif;
+    font-size: 18px;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.4;
+  }
+  
+  .createButton {
+    background-color: #45B681;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8.5px;
+    cursor: pointer;
+  }
+
+  .createButtonHover:hover {
+    background-color: #3d9f70;
+  }
+  
+  @media (max-width: 768px) {
+    .mainContent {
+      flex-direction: column;
+    }
+  
+    .imageContainer {
+      margin-right: 0;
+      margin-bottom: 2rem;
+      width: 100%;
+      height: auto;
+    }
+  
+    .workerImage {
+      max-width: 100%;
+      height: auto;
+    }
+  
+    .textContainer {
+      margin-right: 0;
+    }
+  }
