@@ -18,7 +18,7 @@ export default function LoginPage() {
           <Image src="/logo.png" alt="Time Spark Logo" width={74} height={82} />
           <h1 className="h4 mt-2">TIME SPARK</h1>
           <h2 className="h4 mt-2">Login</h2>
-          </div>
+        </div>
         <form action={action}>
           <div className="mb-3">
             <input type="email" name="email" className="form-control" placeholder="Email" />
@@ -36,7 +36,7 @@ export default function LoginPage() {
           
         </form>
         <div className="text-center text-muted my-3">OR</div>
-        <Link style={{textDecoration: "none"}} href="http://127.0.0.1:8000/api/google/auth">
+        <Link style={{textDecoration: "none"}} href="http://127.0.0.1:8000/api/google/auth" target="">
           <button className="btn btn-light border-1 border-black border-solid w-100 mb-2 d-flex align-items-center justify-content-center">
             <Image src="/icons/google-icon.png" alt="Google Icon" width={20} height={20} className="me-2" />
             Sign in with Google
@@ -56,7 +56,7 @@ function SubmitButton() {
  
   return (
     <button disabled={pending} type="submit" value="Submit" className="btn btn-primary border-1 border-black border-solid w-100 mb-3">
-      Sign Up
+      Login
     </button>
   )
 }

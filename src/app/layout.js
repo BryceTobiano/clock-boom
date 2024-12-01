@@ -5,7 +5,7 @@ const saira = Saira({ subsets: ['latin'] })
 
 export const metadata = {
   title: "Time Spark",
-  description: "Autp Generate ",
+  description: "A time management app!",
 };
 
 export default function RootLayout({ children }) {

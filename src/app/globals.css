@@ -6,7 +6,9 @@
   --gray: #F4F4F4;
   --yellow: #FDC613;
   --red: #ED6033;
+  --dark-red: #822506;
   --green: #45B681;
+  --dark-green: #2d7352;
   --blue: #5396E4;
 }
 
@@ -30,8 +32,6 @@ body {
   margin: 0;
 }
 
-
-
 /* ======= START - STYLING DEFAULT COMPONENTS ======= */
 h1 {
   font-weight: 500;
@@ -40,6 +40,44 @@ h1 {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.btn {
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn.primary-button {
+  font-family: inherit;
+  color: var(--gray);
+  background-color: var(--green);
+  border: 1px solid black;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.10);
+}
+
+.btn.primary-button:hover {
+  background-color: var(--dark-green);
+}
+
+.btn.danger-button {
+  background-color: var(--red);  
+  font-family: inherit;
+  color: var(--gray);
+  border: 1px solid black;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.10);
+}
+
+.btn.danger-button:hover {
+  background-color: var(--dark-red);
+}
+
+.btn:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
 }
 /* ======= END - STYLING DEFAULT COMPONENTS ======= */
 
@@ -59,61 +97,44 @@ a {
 
 /* START - Full-Calendar Styling Classes */
 
-.fc .fc-button {
-  color: black;
-  background-color: white;
-  text-transform: capitalize;
-  font-weight: 600;
-  box-shadow: 0px 4px 20px -5px rgba(0,0,0,0.2);
+.fc {
+  width: 60vw;
+  height: 70vh;
+}
+.fc-theme-standard .fc-scrollgrid {
+  border-radius: 5px;
+  border: 1px solid black !important;
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+}
 
+.fc .fc-cell-shaded {
+  background: black !important;
+}
+
+
+.fc .fc-toolbar-title {
+  font-size: 1.25em !important;
+} 
+
+.fc .fc-button {
+  background-color: white !important;
+  color: black !important;
+  font-weight: 600 !important;
+
+  padding: 0.3em 0.5em !important;
+  font-size: 1em !important;
+}
+
+.fc .fc-button-group {
+  border-radius: 5px;
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
 }
 
 .fc .fc-button-active {
-  color: white;
-  background-color: black;
+  background-color: black !important;
+  color: white !important;
 }
 
-.fc .fc-dayGridDay-button {
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
-  padding-right: 1em;
-  padding-left: 1em;
+.fc .fc-col-header-cell-cushion {
+  font-size: 0.75em !important;
 }
-
-.fc .fc-dayGridMonth-button {
-  border-radius: 0px;
-  padding-right: 1em;
-  padding-left: 1em;
-}
-
-.fc .fc-timeGridWeek-button {
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
-  padding-right: 1em;
-  padding-left: 1em;
-  margin-right: 1em;
-}
-
-.fc .fc-toolbar-title {
-  display: inline;
-  padding: 0.3em 1em;
-  padding-bottom: 0.45em ;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
-
-  font-size: 1em;
-  font-weight: 600;
-  box-shadow: 0px 4px 20px -5px rgba(0,0,0,0.2);
-}
-
-.fc .fc-next-button {
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
-}
-
-.fc .fc-prev-button {
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
-}
-
-/* END - Full-Calendar Styling Classes */

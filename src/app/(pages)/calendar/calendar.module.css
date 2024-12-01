@@ -1,1 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira:wght@300;400;500;600;700&display=swap');
 
+.container {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+
+}
+
+.calendarContainer {
+    margin-right: 1em;
+}
+
+ .accordionWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+ }
+
+.accordion {
+    border: 1px solid black;
+    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+}
+
+.accordionDetails {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 1em;
+    width: 100%;
+    border-top: 1px solid black;
+}
+
+.accordionButton {
+    font-family: inherit;
+    padding: 0.25em;
+    font-size: 0.8em;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: none;
+    text-align: left;
+}
+
+.accordionButton:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40vw;
+    padding: 3em;
+    background-color:white;
+    border: 1px solid black;
+    border-radius: 10px;    /* box-shadow: 24; */
+}
+
+.modalForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.categorySelect {
+    padding: 0.5em;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid black;
+    margin-top: 0.5em;
+}
+
+.inputGroup input {
+    width: 100%;
+    padding: 0.5em;
+    border: 1px solid black;
+    border-radius: 6px;
+    font-family: 'Saira', sans-serif;
+    color: #333;
+}
+
+.allDay {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox {
+    background-color: #eee;
+}
+
+.color {
+    width: 2em;
+    height: 2em;
+    border: none;
+    padding: 0;
+    border-radius: 5px;
+}
+
+.color::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
