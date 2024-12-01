@@ -2,13 +2,25 @@ import { LoginSchema, SignupFormSchema } from '@/app/lib/definitions'
 import { redirect } from 'next/dist/server/api-utils';
 
 function setCookie(cname, cvalue) {
+    if (typeof document === 'undefined') {
+        // Return null or handle cookies differently on the server
+        return null;
+    }
+
     const d = new Date();
     d.setTime(d.getTime() + (30*24*60*60*1000));
     let expires = "expires="+ d.toUTCString();
+    while(!document) {} // busy wait
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
 export function getCookie(cname) {
+
+    if (typeof document === 'undefined') {
+        // Return null or handle cookies differently on the server
+        return null;
+    }
+    
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
@@ -162,33 +174,29 @@ export async function signup(state, formData ) {
     }
   }
 
-export async function refresh(response) {
-    console.log(response)
+import { useCookies } from 'next-client-cookies';
+
+
+export async function refresh() {
     let refreshToken = getCookie("timesparkRefreshToken");
-    if (!response.ok) {
-        if(response.status == 401) {
-            await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + '/api/token/refresh/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ refresh: refreshToken }),
-            })
-            .then(res => {
-                if (!res.ok) {
-                    setCookie("timesparkRefreshToken", "");
-                    setCookie("timesparkAccessToken", "");
-                    window.history.pushState(null, '/login')
-                    window.location.replace("/login");
-                } else {
-                    return res.json();
-                }
-            })
-            .then(json => {
-                setCookie("timesparkAccessToken", json.access)
-            })
+    console.log("REFRESH CALLED: " + refreshToken);
+    await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + '/api/token/refresh/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ refresh: refreshToken }),
+    })
+    .then(res => {
+        if (!res.ok) {
+            setCookie("timesparkRefreshToken", "");
+            setCookie("timesparkAccessToken", "");
+            redirect('/login');
         } else {
-            throw new Error(`HTTP error! status: ${res.status}`);
+            return res.json();
         }
-    }
+    })
+    .then(json => {
+        setCookie("timesparkAccessToken", json.access);
+    })
 }

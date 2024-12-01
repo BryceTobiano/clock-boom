@@ -6,6 +6,7 @@
   --gray: #F4F4F4;
   --yellow: #FDC613;
   --red: #ED6033;
+  --dark-red: #822506;
   --green: #45B681;
   --dark-green: #2d7352;
   --blue: #5396E4;
@@ -48,7 +49,6 @@ a {
   border: none;
   border-radius: 5px;
   transition: background-color 0.3s ease;
-  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.10);
 }
 
 .btn.primary-button {
@@ -61,6 +61,18 @@ a {
 
 .btn.primary-button:hover {
   background-color: var(--dark-green);
+}
+
+.btn.danger-button {
+  background-color: var(--red);  
+  font-family: inherit;
+  color: var(--gray);
+  border: 1px solid black;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.10);
+}
+
+.btn.danger-button:hover {
+  background-color: var(--dark-red);
 }
 
 .btn:disabled {
