@@ -9,7 +9,6 @@ import { redirect } from 'next/navigation';
 export default async function Page() {
   const cookieStore = await cookies();
   let token = cookieStore.get("timesparkAccessToken")?.value
-
   if(!token) {
     redirect('/login');
   }
