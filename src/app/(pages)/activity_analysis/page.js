@@ -1,100 +1,86 @@
-import clsx from 'clsx';
-import React from 'react';
-import dynamic from 'next/dynamic';
-import styles from './activity_analysis.module.css';
-import '../../globals.css';
-import global from '../../global.module.css';
-import Navbar from '../../components/nav/nav';
-import Image from 'next/image';
-import Chart from 'chart.js/auto';
-import BarChart from './components/BarChart';
-import PieChart from './components/PieChart';
-import DonutChart from './components/DonutChart';
-import CompletedDropdown from './components/CompletedDropdown';
-import InProgressDropdown from './components/InProgressDropdown';
-import NotStartedDropdown from './components/NotStartedDropdown';
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"></script>
+'use server'
 
-export default function ActivityAnalysis() {
+// app/posts/page.js
+import ActivityAnalysis from './activity_analysis'; // Import Client Component
+import { cookies } from 'next/headers'
+import { getUserIdFromToken } from "@/app/actions/jwt";
+import { redirect } from 'next/navigation';
 
-  const timeSheetData = [
-    { name: 'Work', value: 102, color: '#2196F3' },
-    { name: 'Personal', value: 54, color: '#FFC107' },
-    { name: 'Self Development', value: 60, color: '#FF5722' },
-  ];
+export default async function Page() {
+  const cookieStore = await cookies();
+  let token = cookieStore.get("timesparkAccessToken")?.value
+  if(!token) {
+    redirect('/login');
+  }
 
+  const refreshToken = cookieStore.get("timesparkRefreshToken")?.value
+  const refreshRes = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + '/api/token/refresh/', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ refresh: refreshToken }),
+  })
+  .then(res => {
+      if (!res.ok) {
+        // cookieStore.delete("timesparkAccessToken");
+        // cookieStore.delete("timesparkRefreshToken");
+        redirect('/login');
+      } else {
+          return res.json();
+      }
+  })
+  .then(json => {
+    token = json.access
+    return json.access;
+  })
 
-  return (
-    <div className={clsx(styles.container, global.page)}>
-      <div><Navbar /></div>
-      <h1>ACTIVITY ANALYSIS</h1>
-  
-      <div className={styles.grid}>
+  let userId = getUserIdFromToken(token);
+
+  //*****************************************
+  //*****  Fetch data on the server *********
+  //*****************************************
+
+  // Get Calendars
+  const calendarsRes = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + '/api/calendar/?user=' + userId, {
+    method: 'GET',
+    headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        'Authorization': `Bearer ${token}`, // Add the JWT token here
+    }
+  }).then(res => {
+    return res.json();
+  })
+  const calendars = await calendarsRes
+
       
-        <div className={styles.row}>
+  // Get Categories
+  const categoryRes = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + '/api/category/?user=' + userId, {
+    method: 'GET',
+    headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        'Authorization': `Bearer ${token}`, // Add the JWT token here
+    }
+  })
+  .then(res => {
+      return res.json();
+  })
+  const category = await categoryRes
 
-          {/* Efficiency Score */}
-          <div className={styles.cardLeft}>
-            <h2 className={styles.cardTitle}>EFFICIENCY SCORE</h2>
-            <div><DonutChart/></div>
-            <p className={styles.efficiencyScore}>
-              <span className={styles.scoreValue}>87%</span><br />
-              Daily Tasks Completed<br />
-              October 7, 2024
-            </p>
-          </div>
+  // Get Events
+  const eventsRes = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + '/api/events/?user=' + userId, {
+    method: 'GET',
+    headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        'Authorization': `Bearer ${token}`, // Add the JWT token here
+    }
+  })
+  .then(res => {
+      return res.json();
+  })
+  const events = await eventsRes
 
-          {/* Today's Tasks */}
-          <div className={styles.todaysTasks}>
-            <div className={styles.taskListHeader}>
-              <div className={styles.inline}>
-                <h2 className={styles.cardTitle}>TODAY</h2>
-                <h2 className={styles.date}>TUESDAY, SEPTEMBER 17</h2>
-              </div>
-            </div>
-            {/* <div className={styles.taskList}> */}
-              <div className={`${styles.task} ${styles.completed}`}>
-                  <span><CompletedDropdown/></span>
-                </div>
-                <div className={`${styles.task} ${styles.inProgress}`}>
-                  <span><InProgressDropdown/></span>
-                </div>
-                <div className={`${styles.task} ${styles.notStarted}`}>
-                  <span><NotStartedDropdown/></span>
-                </div>
-              </div>
-          {/* </div> */}
 
-        </div>
-      
-
-        <div className={styles.row}>
-          {/* Work Log */}
-          <div className={styles.cardLeft}>
-            <h2 className={styles.cardTitle}>WORK LOG</h2>
-            <div><BarChart/></div>
-            <p className={styles.workLogLabel}>Work Logged in Last 4 Days</p>
-          </div>
-
-          {/* Time Sheet */}
-          <div className={`${styles.card} ${styles.timeSheet}`}>
-            <h2 className={styles.cardTitle}>TIME SHEET</h2>
-            <div className={styles.timeSheetContent}>
-              <div><PieChart/></div>
-              {/* <ul className={styles.timeSheetList}>
-                {timeSheetData.map((item, index) => (
-                  <li key={index} className={styles.timeSheetItem}>
-                    <span className={styles.colorDot} style={{ backgroundColor: item.color }}></span>
-                    <span className={styles.itemName}>{item.name}</span>
-                    <span className={styles.itemHours}>{item.value}:00</span>
-                  </li>
-                ))}
-              </ul> */}
-            </div>
-          </div>
-      </div>
-
-    </div>
-    </div>
-  );
+  // Pass Server Data into client component
+  return <ActivityAnalysis calendars={calendars} categories={category} events={events} />;
 }

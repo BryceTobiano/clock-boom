@@ -63,7 +63,7 @@
     height: 100%;
     align-items: center;
     justify-content: center;
-    width:50%;
+    width:100%;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
@@ -169,6 +169,7 @@
   
   .timeSheetContent {
     display: flex;
+    flex: 1;
     align-items: center;
     gap:5%;
     margin-top:5%;
@@ -212,3 +213,12 @@
     justify-content: center;
     margin-bottom: 1rem;
   }
+
+  .categorySelect {
+    font-family: inherit;
+    padding: 0.5em;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid black;
+    margin-top: 0.5em;
+}

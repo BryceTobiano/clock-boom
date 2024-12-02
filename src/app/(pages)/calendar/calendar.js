@@ -26,7 +26,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 export default function Calendar({ calendars, categories, events }) {
   const [userCalendars, setUserCalendars] = useState(calendars);
   const [userCategories, setUserCategories] = useState(categories);
-  const [allUserEvents, setAllUserEvents] = useState(events);
   const [userEvents, setUserEvents] = useState(events);
   const [selectedCalendars, setSelectedCalendars] = useState(
     userCalendars.map((calendar) => calendar.id) // Initially, all calendars are selected
@@ -107,7 +106,6 @@ export default function Calendar({ calendars, categories, events }) {
   }, []);
 
   const filterEvents = (selectedCalendars) => {
-    // Filter events based on selected calendars
     const filteredEvents = events.filter((event) => selectedCalendars.includes(event.calendar));
     setUserEvents(filteredEvents);
   };
