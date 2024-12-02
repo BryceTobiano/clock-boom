@@ -40,10 +40,11 @@ export default function Home() {
         </div>
 
         <div className={styles.centerColumn}>
-          <div className={styles.timeFinder}>
-            <h3>TIME FINDER</h3>
-            <img src="/img/add_icon.jpg" alt="Add" className={styles.imageline} /><p className={styles.textline} >Find time in my schedule</p>
-          </div>
+            <div className={styles.timeFinder}>
+              <h3>TIME FINDER</h3>
+              <img src="/img/add_icon.jpg" alt="Add" className={styles.imageline} />
+              <p className={styles.textline} >Find time in my schedule</p>
+            </div>
 
           <div className={styles.notes}>
             <h3>NOTES</h3>
