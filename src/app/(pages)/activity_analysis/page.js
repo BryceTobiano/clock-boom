@@ -81,15 +81,6 @@ export default function ActivityAnalysis() {
             <h2 className={styles.cardTitle}>TIME SHEET</h2>
             <div className={styles.timeSheetContent}>
               <div><PieChart/></div>
-              {/* <ul className={styles.timeSheetList}>
-                {timeSheetData.map((item, index) => (
-                  <li key={index} className={styles.timeSheetItem}>
-                    <span className={styles.colorDot} style={{ backgroundColor: item.color }}></span>
-                    <span className={styles.itemName}>{item.name}</span>
-                    <span className={styles.itemHours}>{item.value}:00</span>
-                  </li>
-                ))}
-              </ul> */}
             </div>
           </div>
       </div>

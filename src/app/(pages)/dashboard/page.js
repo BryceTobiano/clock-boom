@@ -2,6 +2,11 @@ import styles from "./dashboard.module.css";
 import '../../globals.css';
 import global from '../../global.module.css';
 import Navbar from '../../components/nav/nav';
+import BarChart from "../activity_analysis/components/BarChart";
+import DonutChart from "./components/DonutChart";
+import clsx from 'clsx';
+import React from 'react';
+import CheckboxList from "./components/CheckboxList";
 
 export default function Home() {
   return (
@@ -20,7 +25,7 @@ export default function Home() {
           <div className={styles.activity}>
             <h3>ACTIVITY ANALYSIS</h3>
             <div className={styles.pieChart}>
-              <img src="/img/pie_chart.jpg" alt="Pie Chart" className={styles.image1} />
+              <DonutChart/>
             </div>
             <p>Daily Tasks Completed</p>
           </div>
@@ -28,7 +33,7 @@ export default function Home() {
           <div className={styles.activityAnalysis}>
             <h3>ACTIVITY ANALYSIS</h3>
             <div className={styles.barChart}>
-              <img src="/img/bar_chart.jpg" alt="Bar Chart" className={styles.image2} />
+              <BarChart/>
             </div>
             <p>Work Logged in Last 4 Days</p>
           </div>
@@ -38,8 +43,6 @@ export default function Home() {
           <div className={styles.timeFinder}>
             <h3>TIME FINDER</h3>
             <img src="/img/add_icon.jpg" alt="Add" className={styles.imageline} /><p className={styles.textline} >Find time in my schedule</p>
-            <br></br>
-            <img src="/img/add_icon.jpg" alt="Add" className={styles.imageline} /><p className={styles.textline} >Set up a meeting</p>
           </div>
 
           <div className={styles.notes}>
@@ -64,6 +67,14 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        <div className={styles.rightColumn}>
+          <div className={styles.calendar}>
+            <h3>TO-DO LIST</h3>
+            <span><CheckboxList/></span>
+          </div>
+        </div>
+
       </div>
     </div>
   );
