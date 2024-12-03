@@ -154,6 +154,8 @@
   flex-wrap: wrap;
   margin-top: 20px;
   margin-bottom: 20px;
+  max-height: 160px;
+  overflow-y: scroll;
 }
 
 .timeSlot {

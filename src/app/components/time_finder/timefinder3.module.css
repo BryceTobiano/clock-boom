@@ -66,14 +66,14 @@
 .formInput,
 .formTextarea {
   flex: 1;
-  padding: 10px;
+  padding: 5px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
 .formInput {
-  height: 40px;
+  /* height: 40px; */
 }
 
 .formTextarea {

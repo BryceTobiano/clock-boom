@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import styles from './timefinder4.module.css';
 import global from '../../global.module.css';
-import Navbar from '../../components/nav/nav';
+import Navbar from '../nav/nav.js';
 
 const TimeFinder4 = ({ onScheduleAnother }) => {
   const router = useRouter(); // Initialize the router

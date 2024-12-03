@@ -1,125 +1,86 @@
-'use client';
-import React, { useState } from 'react';
-import styles from './time_finder.module.css';
-import Image from 'next/image';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../globals.css';
-import Navbar from '../../components/nav/nav';
-import TimeFinder1 from '../../time_finder/component/timefinder1';
-import TimeFinder2 from '../../time_finder/component/timefinder2';
-import TimeFinder3 from '../../time_finder/component/timefinder3';
-import TimeFinder4 from '../../time_finder/component/timefinder4';
+'use server'
 
-const TimeFinderPage = () => {
-  const [step, setStep] = useState(1);
-  const [selectedUser, setSelectedUser] = useState('');
-  const [selectedDate, setSelectedDate] = useState({
-    startDate: '',
-    endDate: '',
-    duration: ''
-  });
-  const [selectedTime, setSelectedTime] = useState(null);
-  const [error, setError] = useState('');
+// app/posts/page.js
+import TimeFinder from './timefinder'; // Import Client Component
+import { cookies } from 'next/headers'
+import { getUserIdFromToken } from "@/app/actions/jwt";
+import { redirect } from 'next/navigation';
 
-  const handleNext = (data) => {
-    if (step === 1) {
-      const { startDate, endDate, duration } = data;
+export default async function Page() {
+  const cookieStore = await cookies();
+  let token = cookieStore.get("timesparkAccessToken")?.value
+  if(!token) {
+    redirect('/login');
+  }
 
-      // Check if all required fields are filled
-      if (!startDate || !endDate || !duration) {
-        setError('Please fill in all date and duration fields');
-        return;
+  const refreshToken = cookieStore.get("timesparkRefreshToken")?.value
+  const refreshRes = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + '/api/token/refresh/', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ refresh: refreshToken }),
+  })
+  .then(res => {
+      if (!res.ok) {
+        cookieStore.set("timesparkAccessToken", "");
+        cookieStore.set("teimsparkRefreshToken", "");
+        redirect('/login');
+      } else {
+          return res.json();
       }
+  })
+  .then(json => {
+    token = json.access
+    return json.access;
+  })
 
-      const start = new Date(startDate);
-      const end = new Date(endDate);
+  let userId = getUserIdFromToken(token);
 
-      // Validate dates
-      if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-        setError('Please enter valid dates');
-        return;
-      }
+  //*****************************************
+  //*****  Fetch data on the server *********
+  //*****************************************
 
-      if (end <= start) {
-        setError('End date must be after start date');
-        return;
-      }
-
-      setError('');
-      setSelectedDate(data);
-      setStep(2);
-    } else if (step === 2) {
-      setSelectedUser(data);
-      setStep(3);
-    } else if (step === 3) {
-      setSelectedTime(data);
-      setStep(4);
-    } else if (step === 4) {
-      console.log('Meeting request sent:', { selectedUser, selectedDate, selectedTime, ...data });
-      setStep(5);
+  // Get Calendars
+  const calendarsRes = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + '/api/calendar/?user=' + userId, {
+    method: 'GET',
+    headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        'Authorization': `Bearer ${token}`, // Add the JWT token here
     }
-  };
+  }).then(res => {
+    return res.json();
+  })
+  const calendars = await calendarsRes
 
-  const handleBack = () => {
-    setError('');
-    setStep(step - 1);
-  };
-
-  const handleDashboard = () => {
-    console.log('Navigating to dashboard');
-  };
-
-  const handleScheduleAnother = () => {
-    // Reset state to Step 1
-    setStep(1);
-    setSelectedUser('');
-    setSelectedDate({
-      startDate: '',
-      endDate: '',
-      duration: ''
-    });
-    setSelectedTime(null);
-    setError('');
-  };
-
-  return (
-    <div>
-      {error && (
-        <div className={styles.errorMessage}>
-          {error}
-        </div>
-      )}
-
-      {step === 1 && (
-        <TimeFinder1 
-          onNext={handleNext} 
-          initialData={selectedDate}
-        />
-      )}
       
-      {step === 2 && (
-        <TimeFinder2 
-          onNext={handleNext} 
-          onBack={handleBack}
-        />
-      )}
-      
-      {step === 3 && (
-        <TimeFinder3 
-          onNext={handleNext} 
-          onBack={handleBack}
-        />
-      )}
-      
-      {step === 4 && (
-        <TimeFinder4 
-          onDashboard={handleDashboard} 
-          onScheduleAnother={handleScheduleAnother} 
-        />
-      )}
-    </div>
-  );
-};
+  // Get Categories
+  const categoryRes = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + '/api/category/?user=' + userId, {
+    method: 'GET',
+    headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        'Authorization': `Bearer ${token}`, // Add the JWT token here
+    }
+  })
+  .then(res => {
+      return res.json();
+  })
+  const category = await categoryRes
 
-export default TimeFinderPage;
+  // Get Events
+  const eventsRes = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + '/api/events/?user=' + userId, {
+    method: 'GET',
+    headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        'Authorization': `Bearer ${token}`, // Add the JWT token here
+    }
+  })
+  .then(res => {
+      return res.json();
+  })
+  const events = await eventsRes
 
+
+  // Pass Server Data into client component
+  return <TimeFinder calendars={calendars} categories={category} events={events} />;
+}
