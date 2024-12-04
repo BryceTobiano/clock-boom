@@ -50,6 +50,8 @@ export async function signup(state, formData ) {
       }
     }
 
+    console.log(validatedFields.data)
+
 // 2. Prepare data for insertion into database
     const { name, email, password } = validatedFields.data
     // e.g. Hash the user's password before storing it
@@ -100,7 +102,7 @@ export async function signup(state, formData ) {
             }
         })
         .then((res) => {
-            if(res.status >= 400) {
+            if(!res.ok) {
                 validUser = 0;
             }
             return res.json()

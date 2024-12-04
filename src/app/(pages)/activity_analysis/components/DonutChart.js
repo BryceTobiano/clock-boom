@@ -14,13 +14,22 @@ export default function DonutChart({calendar, categories, events}){
 
         const filteredEvents = events.filter((event) => (event.calendar == calendar));
 
+        filteredEvents.forEach((event) => {
+            const startTime = new Date(event.start);
+            const endTime = new Date(event.end);
+
+            // Calculate duration in hours
+            const duration = (endTime - startTime);
+
+            // Add duration to each category the event belongs to
+        });
+
         categories.map((category) => {
             labels.push(category.name)
 
             let filteredByCategory = filteredEvents.filter((event) =>
                 event.categories.includes(category.id)
             );
-            let tempTotal = 0;
             filteredByCategory.forEach((event) => {
                 const startTime = new Date(event.start);
                 const endTime = new Date(event.end);
@@ -51,18 +60,18 @@ export default function DonutChart({calendar, categories, events}){
                             label: "Work Logged in Last 4 Days",
                             data: data,
                             backgroundColor: [
-                                "rgb(83, 150, 228, 0.3)",
-                                "rgb(253, 198, 19, 0.3)",
-                                "rgb(69, 182, 129, 0.3)",
+                                "rgb(255, 99, 132, 0.2)",
+                                "rgb(255, 159, 64, 0.2)",
+                                "rgb(255, 205, 86, 0.2)",
                                 "rgb(75, 192, 192, 0.2)",
                                 "rgb(54, 162, 235, 0.2)",
                                 "rgb(153, 102, 255, 0.2)",
                                 "rgb(201, 203, 207, 0.2)",
                             ],
                             borderColor: [
-                                "rgb(83, 150, 228)",
-                                "rgb(253, 198, 19)",
-                                "rgb(69, 182, 129)",
+                                "rgb(255, 99, 132)",
+                                "rgb(255, 159, 64)",
+                                "rgb(255, 205, 86)",
                                 "rgb(75, 192, 192)",
                                 "rgb(54, 162, 235)",
                                 "rgb(153, 102, 255)",
@@ -75,6 +84,20 @@ export default function DonutChart({calendar, categories, events}){
                 options: {
                     responsive: false,
                     maintainAspectRatio: false, // Prevent enforcing aspect ratio
+                    plugins: {
+                        tooltip: {
+                          callbacks: {
+                            label: function (context) {
+                              const ms = context.raw; // The raw data in milliseconds
+                              const hours = Math.floor(ms / (1000 * 60 * 60));
+                              const minutes = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60));
+                              const totalminutes = Math.floor((totalTime % 60000) / 1000);
+                              const percentage = minutes/(totalTime / (1000 * 60)) * 100;
+                              return `${context.label}: ${hours}h ${minutes}m `; // Format the tooltip
+                            },
+                          },
+                        },
+                    }
                 }
             });
 

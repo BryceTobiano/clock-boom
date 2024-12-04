@@ -54,6 +54,7 @@ export default function BarChart({ categories, events }){
 
         categories.map((category) => {
             labels.push(category.name)
+            console.log(labels)
             data.push([0,0,0,0,0,0,0]);
         })
 
@@ -80,9 +81,9 @@ export default function BarChart({ categories, events }){
 
         });
 
-        const datasets = data.map((categoryData, index) => {
+        const datasets = data.map((categoryData, i) => {
             return {
-                label: labels[index]?.name || `Category ${index + 1}`, // Dynamically name the category
+                label: labels[i] , // Dynamically name the category
                 data: categoryData, // Assign the data array
                 borderWidth: 1,
             };

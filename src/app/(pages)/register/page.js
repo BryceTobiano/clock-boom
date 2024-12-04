@@ -10,7 +10,7 @@ import { useFormState, useFormStatus } from 'react-dom'
 import { useActionState } from 'react';
 
 export default function Register() {
-  const [state, action] = useActionState(signup, undefined)
+  const [state, action] = useFormState(signup, undefined)
 
   return (
     <div className={`${styles.container} container-fluid d-flex align-items-center justify-content-center min-vh-100`}>

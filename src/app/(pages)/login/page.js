@@ -9,7 +9,7 @@ import { login } from '@/app/actions/auth'
 import { useFormState, useFormStatus } from 'react-dom'
 
 export default function LoginPage() {
-  const [state, action] = useActionState(login, undefined)
+  const [state, action] = useFormState(login, undefined)
 
   return (
     <div className={`${styles.container} container-fluid d-flex align-items-center justify-content-center min-vh-100`}>
