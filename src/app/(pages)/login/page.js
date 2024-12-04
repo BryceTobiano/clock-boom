@@ -36,7 +36,7 @@ export default function LoginPage() {
           
         </form>
         <div className="text-center text-muted my-3">OR</div>
-        <Link style={{textDecoration: "none"}} href="http://127.0.0.1:8000/api/google/auth" target="">
+        <Link style={{textDecoration: "none"}} href="https://timespark-backend.brycetobiano.com/api/google/auth" target="">
           <button className="btn btn-light border-1 border-black border-solid w-100 mb-2 d-flex align-items-center justify-content-center">
             <Image src="/icons/google-icon.png" alt="Google Icon" width={20} height={20} className="me-2" />
             Sign in with Google

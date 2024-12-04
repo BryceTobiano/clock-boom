@@ -50,7 +50,6 @@ export async function signup(state, formData ) {
       }
     }
 
-    console.log(validatedFields.data)
 
 // 2. Prepare data for insertion into database
     const { name, email, password } = validatedFields.data
@@ -69,7 +68,7 @@ export async function signup(state, formData ) {
                 password: password
             }),
             headers: {
-            "Content-type": "application/json; charset=UTF-8"
+                "Content-type": "application/json; charset=UTF-8"
             }
         })
         .then((res) => {

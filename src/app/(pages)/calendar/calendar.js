@@ -246,7 +246,12 @@ export default function Calendar({ calendars, categories, events }) {
     const formData = new FormData(e.target);
     const name = formData.get('name');
     const description = formData.get('description');
-    const category = formData.get('category');
+    let category = formData.get('category');
+    if(category == null) {
+      category = []
+    } else {
+      category = [formData.get('category')]
+    }
     const calendar = formData.get('calendar');
     const startDate = formData.get('startDate');
     const endDate = formData.get('endDate');
@@ -260,6 +265,7 @@ export default function Calendar({ calendars, categories, events }) {
 
     refresh();
     token = getCookie("timesparkAccessToken");
+    console.log(category)
 
     await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + '/api/events/', {
         method: 'POST',
@@ -270,7 +276,7 @@ export default function Calendar({ calendars, categories, events }) {
             "end": endDate,
             "is_all_day": allDay,  
             "calendar": calendar,
-            "categories": [category],
+            "categories": [],
             "color": color,
             "user": userId
         }),
