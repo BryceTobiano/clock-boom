@@ -41,46 +41,19 @@ export default async function Page() {
   //*****  Fetch data on the server *********
   //*****************************************
 
-  // Get Calendars
-  const calendarsRes = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + '/api/calendar/?user=' + userId, {
+  const userInfoRes = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + '/api/user-dashboard/' + userId, {
     method: 'GET',
     headers: {
         "Content-type": "application/json; charset=UTF-8",
         'Authorization': `Bearer ${token}`, // Add the JWT token here
     }
   }).then(res => {
+    if(!res.ok) {
+      redirect('/login');
+    }
     return res.json();
   })
-  const calendars = await calendarsRes
-
-      
-  // Get Categories
-  const categoryRes = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + '/api/category/?user=' + userId, {
-    method: 'GET',
-    headers: {
-        "Content-type": "application/json; charset=UTF-8",
-        'Authorization': `Bearer ${token}`, // Add the JWT token here
-    }
-  })
-  .then(res => {
-      return res.json();
-  })
-  const category = await categoryRes
-
-  // Get Events
-  const eventsRes = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + '/api/events/?user=' + userId, {
-    method: 'GET',
-    headers: {
-        "Content-type": "application/json; charset=UTF-8",
-        'Authorization': `Bearer ${token}`, // Add the JWT token here
-    }
-  })
-  .then(res => {
-      return res.json();
-  })
-  const events = await eventsRes
-
 
   // Pass Server Data into client component
-  return <TimeFinder calendars={calendars} categories={category} events={events} />;
+  return <TimeFinder calendars={userInfoRes.calendars} categories={userInfoRes.categories} events={userInfoRes.events}/>;
 }

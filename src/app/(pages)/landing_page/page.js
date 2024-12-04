@@ -5,6 +5,7 @@ import styles from './landing.module.css';
 import Image from 'next/image';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import global from '../../global.module.css';
+import { redirect } from 'next/navigation'
 
 export default function LandingPage() {
   return (
@@ -21,7 +22,9 @@ export default function LandingPage() {
           <div className={styles.textContainer}>
             <h1 className={styles.mainTitle}>TIME MANAGEMENT REDEFINED.</h1>
             <p className={styles.mainDescription}>Analyze your efficiency, manage your tasks, and schedule events all in one click.</p>
-            <button className={`${styles.createButton} ${styles.createButtonHover}`}>CREATE AN ACCOUNT</button>
+            <button onClick={()=>{
+                redirect(`/register`) 
+            }}className={`${styles.createButton} ${styles.createButtonHover}`}>CREATE AN ACCOUNT</button>
           </div>
           <div className={styles.imageContainer}>
             <Image className={styles.workerImage} src="/icons/worker.png" alt="Busy Worker" width={400} height={266} />

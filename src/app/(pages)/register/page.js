@@ -7,13 +7,14 @@ import Link from 'next/link';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { signup } from '@/app/actions/auth'
 import { useFormState, useFormStatus } from 'react-dom'
+import { useActionState } from 'react';
 
 export default function Register() {
-  const [state, action] = useFormState(signup, undefined)
+  const [state, action] = useActionState(signup, undefined)
 
   return (
     <div className={`${styles.container} container-fluid d-flex align-items-center justify-content-center min-vh-100`}>
-      <div className={styles.loginBox} card p-4 shadow-sm>
+      <div className={`${styles.loginBox} ${styles.card} p-4 shadow-sm`} >
         <div className="text-center mb-4">
           <Image src="/logo.png" alt="Time Spark Logo" width={74} height={82} />
           <h1 className="h4 mt-2">TIME SPARK</h1>

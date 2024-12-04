@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useActionState } from 'react';
 import styles from './login.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,11 +9,11 @@ import { login } from '@/app/actions/auth'
 import { useFormState, useFormStatus } from 'react-dom'
 
 export default function LoginPage() {
-  const [state, action] = useFormState(login, undefined)
+  const [state, action] = useActionState(login, undefined)
 
   return (
     <div className={`${styles.container} container-fluid d-flex align-items-center justify-content-center min-vh-100`}>
-      <div className={styles.loginBox} card p-4 shadow-sm>
+      <div className={`${styles.loginBox} ${styles.card} p-4 shadow-sm`} >
         <div className="text-center mb-4">
           <Image src="/logo.png" alt="Time Spark Logo" width={74} height={82} />
           <h1 className="h4 mt-2">TIME SPARK</h1>

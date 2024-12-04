@@ -54,7 +54,7 @@
 
 .inputRow {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     gap: 1em;
     margin-bottom: 30px;
 }

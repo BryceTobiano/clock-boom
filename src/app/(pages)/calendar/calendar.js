@@ -31,6 +31,7 @@ export default function Calendar({ calendars, categories, events }) {
     userCalendars.map((calendar) => calendar.id) // Initially, all calendars are selected
   );
 
+
   const [createCalendarModalOpen, setcreateCalendarOpen] = useState(false);
   const createCalendarOpen = () => setcreateCalendarOpen(true);
   const createCalendarClose = () => setcreateCalendarOpen(false);
