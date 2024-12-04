@@ -98,7 +98,8 @@ a {
 /* START - Full-Calendar Styling Classes */
 
 .list .fc {
-  max-width: 200px;
+  min-width: 20vw;
+  max-width: 40vw;
   height: 60vh;
   font-size: 0.5em;
 }

@@ -7,11 +7,11 @@ import FullCalendar from '@fullcalendar/react'
 import listPlugin from '@fullcalendar/list';
 import PieChart from "../activity_analysis/components/PieChart";
 import DonutChart from '../activity_analysis/components/DonutChart';
-import CheckboxList from './components/CheckBoxList';
+import CheckboxList from './components/CheckboxList';
 
 export default function Home({ calendars, categories, events }) {
   return (
-    <div className={clsx(styles.container, global.page)}>
+    <div className={clsx(styles.container, global.page)} style={{height: "100vh"}}>
       <Navbar />
 
       <h1>DASHBOARD</h1>
@@ -21,7 +21,7 @@ export default function Home({ calendars, categories, events }) {
         <div className={styles.row}>
 
           {/* Work Log */}
-          <div className={`${styles.cardLeft} list`} style={{width: "100%"}}>
+          <div className={`${styles.cardLeft} list`}>
             <FullCalendar
                   plugins={[ listPlugin ]}
                   initialView="listWeek"
@@ -38,27 +38,10 @@ export default function Home({ calendars, categories, events }) {
       
 
         <div className={styles.row}>
-          {/* Efficiency Score */}
-          <div className={styles.card} style={{width: "100%"}}>
-            <h2 className={styles.cardTitle}>TIME SPENT BY CALENDAR</h2>
-            <select 
-              name="calendar" 
-              defaultValue={calendars.length > 0 ? calendars[0].id : "DEFAULT"} 
-              className={styles.categorySelect}
-              onChange={(e) => {
-                setSelectedCalendar(e.target.value);
-              }}
-              style={{marginTop: "5px"}}
-            required>
-              <option disabled value="DEFAULT"> -- Select an option -- </option>
-              {calendars.map((calendar, index) => (
-                <option key={index} value={calendar.id}>
-                  {calendar.name}
-                </option>
-              ))}
-            </select>
+          <div className={styles.rightcard}>
+            <h3>TO-DO LIST</h3>
+            <span><CheckboxList/></span>
           </div>
-
           {/* Time Sheet */}
           <div className={styles.card} style={{marginTop: "10px", width: "100%"}}>
             <h2 className={styles.cardTitle}>TIME SPENT BY CATEGORY</h2>
@@ -70,15 +53,12 @@ export default function Home({ calendars, categories, events }) {
         <div className={styles.row}>
 
           {/* to do list */}
-          <div className={styles.rightcard}>
-            <h3>TO-DO LIST</h3>
-            <span><CheckboxList/></span>
-          </div>
+          
           
           {/* Notes */}
           <div className={styles.rightcard}>
             <h3>NOTES</h3>
-            <textarea style={{width:"400px", height:"300px"}}></textarea>
+            <textarea style={{width:"400px", height:"57vh"}}></textarea>
           </div>
 
       </div>
