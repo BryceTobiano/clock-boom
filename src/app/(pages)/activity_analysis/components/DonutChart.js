@@ -73,7 +73,8 @@ export default function DonutChart({calendar, categories, events}){
                     ],
                 },
                 options: {
-                    // responsive: true; 
+                    responsive: false,
+                    maintainAspectRatio: false, // Prevent enforcing aspect ratio
                 }
             });
 
@@ -81,6 +82,9 @@ export default function DonutChart({calendar, categories, events}){
         }
     }, [calendar])
 
-    return <canvas style={{width: "100%", objectFit: "fill"}} ref={chartRef}/>
+    return <canvas style={{
+        width: "90%",
+        objectFit: "fill"
+    }} ref={chartRef}/>
 
 }

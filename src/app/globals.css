@@ -97,26 +97,30 @@ a {
 
 /* START - Full-Calendar Styling Classes */
 
-.fc {
-  width: 60vw;
-  height: 70vh;
-}
-.fc-theme-standard .fc-scrollgrid {
-  border-radius: 5px;
-  border: 1px solid black !important;
-  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+.list .fc {
+  max-width: 200px;
+  height: 60vh;
+  font-size: 0.5em;
 }
 
-.fc .fc-cell-shaded {
-  background: black !important;
+.list .fc-cell-shaded {
+  background: white !important;
 }
 
+.list .fc-list-event-graphic {
+  display: none;
+};
 
-.fc .fc-toolbar-title {
-  font-size: 1.25em !important;
+.list a .fc-list-day-side-text {
+  color: white;
+}
+
+.list .fc-toolbar-title {
+  font-size: 2em !important;
+  margin-right: 10px;;
 } 
 
-.fc .fc-button {
+.list .fc .fc-button {
   background-color: white !important;
   color: black !important;
   font-weight: 600 !important;
@@ -125,16 +129,44 @@ a {
   font-size: 1em !important;
 }
 
-.fc .fc-button-group {
+.calendar .fc {
+  width: 60vw;
+  height: 70vh;
+}
+.calendar .fc-theme-standard .fc-scrollgrid {
+  border-radius: 5px;
+  border: 1px solid black !important;
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+}
+
+.calendar .fc .fc-cell-shaded {
+  background: black !important;
+}
+
+
+.calendar.fc .fc-toolbar-title {
+  font-size: 1.25em !important;
+} 
+
+.calendar .fc .fc-button {
+  background-color: white !important;
+  color: black !important;
+  font-weight: 600 !important;
+
+  padding: 0.3em 0.5em !important;
+  font-size: 1em !important;
+}
+
+.calendar .fc .fc-button-group {
   border-radius: 5px;
   box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
 }
 
-.fc .fc-button-active {
+.calendar .fc .fc-button-active {
   background-color: black !important;
   color: white !important;
 }
 
-.fc .fc-col-header-cell-cushion {
+.calendar .fc .fc-col-header-cell-cushion {
   font-size: 0.75em !important;
 }

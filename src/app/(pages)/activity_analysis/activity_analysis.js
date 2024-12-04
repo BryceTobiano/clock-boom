@@ -18,12 +18,6 @@ import duration from "dayjs/plugin/duration";
 
 import Check from '@mui/icons-material/Check';
 
-
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"></script>
 
 export default function ActivityAnalysis({ calendars, categories, events }) {
@@ -53,7 +47,7 @@ export default function ActivityAnalysis({ calendars, categories, events }) {
         <div className={styles.row}>
 
           {/* Work Log */}
-          <div className={styles.cardLeft}>
+          <div className={styles.cardLeft} style={{width: "75%"}}>
             <h2 className={styles.cardTitle}>WEEK BREAKDOWN BY CATEGORY</h2>
             <BarChart categories={categories} events={events} />
           </div>
@@ -64,7 +58,8 @@ export default function ActivityAnalysis({ calendars, categories, events }) {
         <div className={styles.row}>
           {/* Efficiency Score */}
           <div className={styles.card} style={{width: "50%"}}>
-            <h2 className={styles.cardTitle}>CALENDAR BREAKDOWN</h2>
+            <h2 className={styles.cardTitle}>TIME SPENT BY CALENDAR</h2>
+            <DonutChart calendar={selectedCalendar} categories={categories} events={events} />
             <select 
               name="calendar" 
               defaultValue={calendars.length > 0 ? calendars[0].id : "DEFAULT"} 
@@ -72,6 +67,7 @@ export default function ActivityAnalysis({ calendars, categories, events }) {
               onChange={(e) => {
                 setSelectedCalendar(e.target.value);
               }}
+              style={{marginTop: "5px"}}
             required>
               <option disabled value="DEFAULT"> -- Select an option -- </option>
               {calendars.map((calendar, index) => (
@@ -80,7 +76,6 @@ export default function ActivityAnalysis({ calendars, categories, events }) {
                 </option>
               ))}
             </select>
-            <DonutChart calendar={selectedCalendar} categories={categories} events={events} />
           </div>
 
           {/* Time Sheet */}

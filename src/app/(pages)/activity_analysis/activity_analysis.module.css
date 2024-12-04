@@ -45,7 +45,7 @@
     flex-direction: column;
     justify-content: center; /* Center vertically */
     text-align: center; /* For centering text content if needed */
-    height: 100%; /* Ensure the card has a height */
+    /* height: 100%; Ensure the card has a height */
     align-items: center;
     justify-content: center;
     width:100%;
