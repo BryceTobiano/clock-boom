@@ -7,12 +7,12 @@ import FullCalendar from '@fullcalendar/react'
 import listPlugin from '@fullcalendar/list';
 import PieChart from "../activity_analysis/components/PieChart";
 import DonutChart from '../activity_analysis/components/DonutChart';
+import CheckboxList from './components/CheckBoxList';
 
 export default function Home({ calendars, categories, events }) {
   return (
     <div className={clsx(styles.container, global.page)}>
       <Navbar />
-
 
       <h1>DASHBOARD</h1>
   
@@ -33,8 +33,8 @@ export default function Home({ calendars, categories, events }) {
                   nowIndicator={true}
                 />
           </div>
-
-      </div>
+          
+        </div>
       
 
         <div className={styles.row}>
@@ -64,6 +64,23 @@ export default function Home({ calendars, categories, events }) {
             <h2 className={styles.cardTitle}>TIME SPENT BY CATEGORY</h2>
             <PieChart  categories={categories} events={events} />
           </div>
+
+        </div>
+
+        <div className={styles.row}>
+
+          {/* to do list */}
+          <div className={styles.rightcard}>
+            <h3>TO-DO LIST</h3>
+            <span><CheckboxList/></span>
+          </div>
+          
+          {/* Notes */}
+          <div className={styles.rightcard}>
+            <h3>NOTES</h3>
+            <textarea style={{width:"400px", height:"300px"}}></textarea>
+          </div>
+
       </div>
 
     </div>
