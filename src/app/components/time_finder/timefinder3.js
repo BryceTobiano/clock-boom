@@ -16,8 +16,8 @@ const TimeFinder3 = ({ onBack, onNext, selectedTimeSlot, slots, calendars, categ
 
   // Prepopulated data from TimeFinder2
   // State for form inputs
-  const [selectedCategory, setSelectedCategory] = useState(calendars[0]);
-  const [selectedCalendar, setSelectedCalendar] = useState(categories[0]);
+  const [selectedCategory, setSelectedCategory] = useState(categories[0].id);
+  const [selectedCalendar, setSelectedCalendar] = useState(calendars[0].id);
   const [startDateTime, setStartDateTime] = useState(format(new Date(slots[selectedTimeSlot].start), "yyyy-MM-dd'T'HH:mm"));
   const [endDateTime, setEndDateTime] = useState(format(new Date(slots[selectedTimeSlot].end), "yyyy-MM-dd'T'HH:mm"));
   const [eventName, setEventName] = useState('');
@@ -75,9 +75,11 @@ const TimeFinder3 = ({ onBack, onNext, selectedTimeSlot, slots, calendars, categ
                 <div className={styles.formLabel}>CHOOSE A CALENDAR:</div>
                 <select
                   value={selectedCalendar}
-                  onChange={(e) => setSelectedCalendar(e.target.value)}
+                  onChange={(e) => {setSelectedCalendar(e.target.value)}}
                   className={styles.formInput}
+                  // defaultValue={"DEFAULT"} 
                 >
+                  {/* <option disabled value="DEFAULT"> -- Select an option -- </option> */}
                   {calendars.map((calendar, index) => (
                     <option key={index} value={calendar.id}>
                       {calendar.name}
@@ -91,7 +93,9 @@ const TimeFinder3 = ({ onBack, onNext, selectedTimeSlot, slots, calendars, categ
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
                   className={styles.formInput}
+                  // defaultValue={"DEFAULT"} 
                 >
+                  {/* <option disabled value="DEFAULT"> -- Select an option -- </option> */}
                   {categories.map((category, index) => (
                     <option key={index} value={category.id}>
                       {category.name}

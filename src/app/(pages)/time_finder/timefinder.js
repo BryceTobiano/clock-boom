@@ -94,7 +94,7 @@ const TimeFinder = ({ calendars, categories, events }) => {
             "start": data.start,
             "end": data.end,
             "is_all_day": false,  
-            "calendar": data.calendar.id,
+            "calendar": data.calendar,
             "categories": data.category,
             "user": userId
         }),
@@ -152,7 +152,6 @@ const TimeFinder = ({ calendars, categories, events }) => {
     
       setStep(4);
     } else if (step === 4) {
-      console.log('Meeting request sent:', { data });
       setStep(5);
     }
   };

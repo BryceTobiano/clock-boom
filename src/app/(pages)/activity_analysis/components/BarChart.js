@@ -125,14 +125,6 @@ export default function BarChart({ categories, events }){
                             },
                         }
                       }
-                    // scales: {
-                    //     x: {
-                    //         type: "category"
-                    //     },
-                    //     y: {
-                    //         beginAtZero: true
-                    //     }
-                    // }
                 }
             });
 
@@ -140,6 +132,6 @@ export default function BarChart({ categories, events }){
         }
     }, [])
     
-    return ( <canvas style={{width: "100%", objectFit: "fill"}} ref={chartRef}/> )
+    return ( <canvas style={{width: "100%", objectFit: "contain"}} ref={chartRef}/> )
 
 }

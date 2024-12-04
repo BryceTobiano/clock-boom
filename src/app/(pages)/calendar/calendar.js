@@ -356,7 +356,7 @@ export default function Calendar({ calendars, categories, events }) {
         <div className={global.content}>
           <h1>CALENDAR</h1>
           <div className={styles.container}>
-            <div className={styles.calendarContainer}>
+            <div className={`${styles.calendarContainer} calendar`}>
               <FullCalendar
                 plugins={[ dayGridPlugin, timeGridPlugin, interactionPlugin ]}
                 initialView="timeGridWeek"

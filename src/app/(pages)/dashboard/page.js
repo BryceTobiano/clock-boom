@@ -1,70 +1,61 @@
-import styles from "./dashboard.module.css";
-import '../../globals.css';
-import global from '../../global.module.css';
-import Navbar from '../../components/nav/nav';
+'use server'
 
-export default function Home() {
-  return (
+// app/posts/page.js
+import Dashboard from './dashboard'; // Import Client Component
+import { cookies } from 'next/headers'
+import { getUserIdFromToken } from "@/app/actions/jwt";
+import { redirect } from 'next/navigation';
 
-    <div className={styles.dashboard}>
-      <div><Navbar /></div>
+export default async function Page() {
+  const cookieStore = await cookies();
+  let token = cookieStore.get("timesparkAccessToken")?.value
 
-      <div className={styles.header}>
-        <h3>Hello, Bo</h3>
-        <p className={styles.time}>6:07PM</p>
-        <p>Today is Tuesday, September 17th.</p>
-      </div>
+  if(!token) {
+    redirect('/login');
+  }
 
-      <div className={styles.body}>
-        <div className={styles.leftColumn}>
-          <div className={styles.activity}>
-            <h3>ACTIVITY ANALYSIS</h3>
-            <div className={styles.pieChart}>
-              <img src="/img/pie_chart.jpg" alt="Pie Chart" className={styles.image1} />
-            </div>
-            <p>Daily Tasks Completed</p>
-          </div>
+  const refreshToken = cookieStore.get("timesparkRefreshToken")?.value
+  const refreshRes = fetch(process.env.NEXT_PUBLIC_BACKEND_URL + '/api/token/refresh/', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ refresh: refreshToken }),
+  })
+  .then(res => {
+      if (!res.ok) {
+        cookieStore.set("timesparkAccessToken", "");
+        cookieStore.set("teimsparkRefreshToken", "");
+        redirect('/login');
+      } else {
+          return res.json();
+      }
+  })
+  .then(json => {
+    token = json.access
+    return json.access;
+  })
 
-          <div className={styles.activityAnalysis}>
-            <h3>ACTIVITY ANALYSIS</h3>
-            <div className={styles.barChart}>
-              <img src="/img/bar_chart.jpg" alt="Bar Chart" className={styles.image2} />
-            </div>
-            <p>Work Logged in Last 4 Days</p>
-          </div>
-        </div>
+  let userId = getUserIdFromToken(token);
 
-        <div className={styles.centerColumn}>
-          <div className={styles.timeFinder}>
-            <h3>TIME FINDER</h3>
-            <img src="/img/add_icon.jpg" alt="Add" className={styles.imageline} /><p className={styles.textline} >Find time in my schedule</p>
-            <br></br>
-            <img src="/img/add_icon.jpg" alt="Add" className={styles.imageline} /><p className={styles.textline} >Set up a meeting</p>
-          </div>
+  //*****************************************
+  //*****  Fetch data on the server *********
+  //*****************************************
 
-          <div className={styles.notes}>
-            <h3>NOTES</h3>
-            <textarea></textarea>
-          </div>
-        </div>
+  const userInfoRes = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + '/api/user-dashboard/' + userId, {
+    method: 'GET',
+    headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        'Authorization': `Bearer ${token}`, // Add the JWT token here
+    }
+  }).then(res => {
+    if(!res.ok) {
+      redirect('/login');
+    }
+    return res.json();
+  })
+  
 
-        <div className={styles.rightColumn}>
-          <div className={styles.calendar}>
-            <h3>CALENDAR WEEK VIEW</h3>
-            <p className={styles.date}>9/15 - 9/21</p>
-            <div className={styles.events}>
-              <span>M</span><div className={`${styles.event} ${styles.red}`}>Gym</div>
-              <div className={`${styles.event} ${styles.blue}`}>Intern Check In</div>
-              <span>T</span><div className={`${styles.event} ${styles.blue}`}>Client Meeting</div>
-              <span>W</span><div className={`${styles.event} ${styles.blue}`}>Team Meeting</div>
-              <div className={`${styles.event} ${styles.yellow}`}>Walk Dog</div>
-              <span>TH</span><div className={`${styles.event} ${styles.yellow}`}>Family Time</div>
-              <span>F</span><div className={`${styles.event} ${styles.red}`}>Gym</div>
-              <div className={`${styles.event} ${styles.yellow}`}>Walk Dog</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  // Pass Server Data into client component
+  return <Dashboard calendars={userInfoRes.calendars} categories={userInfoRes.categories} events={userInfoRes.events}/>;
 }
