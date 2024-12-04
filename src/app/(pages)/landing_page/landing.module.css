@@ -1,5 +1,5 @@
 .page {
-  position: relative; /* Necessary for absolute positioning within */
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,26 +18,43 @@
   .header {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     width: 100%;
-    margin-bottom: 2rem;
+    padding-right:15%;
   }
+
+  .action {
+    display:flex;
+    gap:50%;
+    width:auto;
+  }
+
   .startButton {
-    position: absolute; /* Make the button's position relative to the viewport */
-    top: 10px; /* Distance from the top of the viewport */
-    right: 10px; /* Distance from the right of the viewport */
     background-color: #f6f6f6;
     color: #676767;
     border: none;
     padding: 5px 10px;
-    font-size: 16px;
-    border-radius: 8.5px;
+    margin-left:5%;
+    font-size: 16pt;
+    border-radius: 8px;
     cursor: pointer;
-    margin: 85px;
+    width:auto;
   }
 
   .startButtonHover:hover {
-    background-color:  #45B681;
+    background-color:  #DEDEDE;
+    color:#676767;
+  }
+
+  .faq {
+    color:#8A8A8A;
+    border: none;
+    background-color: white;
+    font-size: 16pt;
+  }
+
+  .faqHover {
+    color:#4E4E4E;
   }
   
   .logoContainer {
@@ -52,18 +69,16 @@
   }
   
   .mainContent {
-    padding-left: 80px;
+    padding-left:10%;
+    padding-right:10%;
+    padding-top:5%;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
   }
   
   .imageContainer {
-    width: 350px;
-    height: 233px;
-    flex-shrink: 0;
-    margin-right: 2rem;
-    padding-right: 50px;
+    width: 40%;
   }
   
   .workerImage {
@@ -96,13 +111,50 @@
     color: white;
     border: none;
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 14pt;
     border-radius: 8.5px;
     cursor: pointer;
   }
 
   .createButtonHover:hover {
     background-color: #3d9f70;
+  }
+
+  .divider {
+    /* border: 2px solid #F2F2F2; */
+    display: flex;
+    justify-content: space-around;
+    border-radius: 10px;
+    padding-top:2%;
+    padding-bottom:2%;
+    margin-top:2%;
+    width:90%;
+    gap:5%;
+  }
+
+  .features {
+    margin-left:10%;
+    font-size:25pt;
+    font-weight:500;
+    margin-top:10%;
+  }
+
+  .feature {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    font-size:18pt;
+    font-weight: 500;
+    background-color:#F6F6F6;
+    border-radius:10px;
+    padding:3% 5% 3% 5%;
+  }
+
+  .body {
+    font-size:12pt;
+    font-weight:400;
+    text-align: center;
+    margin-top:5%;
   }
   
   @media (max-width: 768px) {
